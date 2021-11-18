@@ -1,0 +1,15 @@
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+  <span class="text-primary">Your order</span>
+  <span class="badge bg-primary rounded-pill">{{ orderItems.length }}</span>
+</h4>
+
+<ul class="list-group mb-3">
+  <app-order-list-item *ngFor="let orderItem of orderItems"
+                        [orderItem]="orderItem"
+                        (onOrderItemClicked)="onOrderItemSelected($event)"
+                        [isSelected]="orderItem.id === selectedOrderItem?.id" ></app-order-list-item>
+  <li class="list-group-item d-flex justify-content-between">
+    <span>Total (USD)</span>
+    <strong>{{ calculateTotal() | currency:'USD' }}</strong>
+  </li>
+</ul>

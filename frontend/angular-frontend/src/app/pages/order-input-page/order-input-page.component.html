@@ -1,0 +1,13 @@
+<div class="row g-5">
+  <div class="col-md-5 col-lg-4 order-md-last">
+    <app-order-list [orderItems]="orderItems" (onOrderItemClicked)="onOrderItemSelected($event)"></app-order-list>
+
+
+    <button class="w-100 btn btn-primary btn-lg"  type="submit" (click)="onOrderSubmit()">Submit</button>
+    <hr class="my-4">
+    <button class="w-100 btn btn-primary btn-lg"  type="submit" (click)="sendToServer()">Send order to server</button>
+  </div>
+  <div class="col-md-7 col-lg-8">
+    <app-order-form (onNewOrderItem)="onNewOrderItemClicked($event)"></app-order-form>
+  </div>
+</div>

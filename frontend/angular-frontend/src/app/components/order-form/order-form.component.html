@@ -1,0 +1,57 @@
+<h4 class="mb-3">Product Information</h4>
+<form (ngSubmit)="onSubmit()" [formGroup]="productForm" class="needs-validation">
+  <div class="row g-3">
+    <div class="col-12">
+      <label for="product-name" class="form-label">Product Name</label>
+      <input type="text" class="form-control" name="product-name" id="product-name" formControlName="productName"
+             placeholder="Enter a name of product">
+
+      <div *ngIf="productName!.invalid && (productName!.dirty || productName!.touched)" class="alert alert-danger">
+        <div *ngIf="productName!.errors!.required">
+          Product Name is required
+        </div>
+
+        <div *ngIf="productName!.errors!.pattern">
+          Product Name should be word without numbers
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <label for="product-price" class="form-label">Price</label>
+    <input type="number" class="form-control" name="product-price" id="product-price" formControlName="productPrice"
+           placeholder="Enter price" min="0.01">
+    <div *ngIf="productPrice!.invalid && (productPrice!.dirty || productPrice!.touched)" class="alert alert-danger">
+      <div *ngIf="productPrice!.errors!.required" >
+        Product Price is required
+      </div>
+
+      <div *ngIf="productPrice!.errors!.pattern" >
+        Product price should be positive number with two significant figures
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <label for="product-price" class="form-label">Quantity</label>
+    <input type="number" class="form-control" name="product-quantity" id="product-quantity"
+           formControlName="productQuantity" required="" placeholder="Enter quantity" min="1">
+    <div *ngIf="productQuantity!.invalid && (productQuantity!.dirty || productQuantity!.touched)"
+         class="alert alert-danger">
+      <div *ngIf="productQuantity!.errors!.required">
+        Product Quantity is required
+      </div>
+
+      <div *ngIf="productQuantity!.errors!.pattern">
+        Product Quantity must be positive number
+      </div>
+    </div>
+  </div>
+
+  <hr class="my-4">
+  <button class="w-100 btn btn-primary btn-lg" *ngIf="isEditingState" type="submit" [disabled]="!productForm.valid">Add / Modify list</button>
+  <button class="w-100 btn btn-warning btn-lg" *ngIf="!isEditingState" type="button" (click)="enableForm()">
+    Back to edit
+  </button>
+</form>
